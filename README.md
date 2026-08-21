@@ -77,3 +77,4 @@ cargo run -p sorocheck -- ./path/to/contract
 ## License
 
 MIT
+# bounty-fix-ref: https://github.com/cyber-excel10/Sorocheck/issues/13
