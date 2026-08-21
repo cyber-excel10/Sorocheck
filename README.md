@@ -1,4 +1,4 @@
-# sorocheck  
+# Sorocheck  
 
 Pre-build checker for **Soroban (Stellar) smart contracts**.
 
