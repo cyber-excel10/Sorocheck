@@ -1,0 +1,15 @@
+[package]
+name = "sorocheck"
+version.workspace = true
+edition.workspace = true
+license.workspace = true
+rust-version.workspace = true
+
+[[bin]]
+name = "sorocheck"
+path = "src/main.rs"
+
+[dependencies]
+sorocheck-core = { path = "../sorocheck-core" }
+clap = { workspace = true }
+anyhow = { workspace = true }
