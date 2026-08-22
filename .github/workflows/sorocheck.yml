@@ -1,0 +1,27 @@
+name: Sorocheck CI
+
+on:
+  push:
+    branches: [ "main", "master" ]
+  pull_request:
+    branches: [ "main", "master" ]
+
+jobs:
+  check-contracts:
+    name: Run Sorocheck on Contracts
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Install Rust toolchain
+        uses: dtolnay/rust-toolchain@stable
+        with:
+          targets: wasm32v1-none
+
+      - name: Build Sorocheck CLI
+        run: cargo build --release -p sorocheck
+
+      - name: Run Sorocheck
+        run: ./target/release/sorocheck .

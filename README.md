@@ -67,14 +67,35 @@ cargo test -p sorocheck-core
 cargo run -p sorocheck -- ./path/to/contract
 ```
 
-### Adding a new check
+## CI/CD Integration (GitHub Actions)
 
-1. Add a module under `sorocheck-core/src/checks/`
-2. Implement the `Check` trait
-3. Register it in `run_all_checks()` in `sorocheck-core/src/lib.rs`
-4. Add fixtures/tests
+You can run `sorocheck` automatically on every push or pull request to ensure your Soroban contracts adhere to environment and standard library constraints before compilation.
+
+Add `.github/workflows/sorocheck.yml` to your repository:
+
+```yaml
+name: Sorocheck CI
+
+on: [push, pull_request]
+
+jobs:
+  check-contracts:
+    name: Run Sorocheck on Contracts
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: dtolnay/rust-toolchain@stable
+        with:
+          targets: wasm32v1-none
+      - name: Build and run sorocheck
+        run: |
+          cargo build --release -p sorocheck
+          ./target/release/sorocheck ./contracts
+```
+
+The job automatically fails with exit code 1 if any error-level findings are detected in the contract path.
 
 ## License
 
 MIT
-# bounty-fix-ref: https://github.com/cyber-excel10/Sorocheck/issues/13
+
