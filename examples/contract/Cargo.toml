@@ -1,0 +1,11 @@
+# Example clean Soroban-style contract path for local and CI runs of sorocheck.
+# sorocheck only parses sources; this crate is not meant to be built as a real contract.
+[package]
+name = "example-contract"
+version = "0.1.0"
+edition = "2021"
+publish = false
+
+[lib]
+crate-type = ["cdylib", "rlib"]
+path = "src/lib.rs"

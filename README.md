@@ -74,6 +74,30 @@ cargo run -p sorocheck -- ./path/to/contract
 3. Register it in `run_all_checks()` in `sorocheck-core/src/lib.rs`
 4. Add fixtures/tests
 
+## CI (GitHub Actions)
+
+A sample workflow lives at [`.github/workflows/sorocheck.yml`](.github/workflows/sorocheck.yml). It:
+
+1. Installs a recent stable Rust toolchain and the `wasm32v1-none` target
+2. Builds `sorocheck` from this repository
+3. Runs it against a contract path (`examples/contract` by default)
+4. Fails the job when sorocheck exits with code **1** (error-level findings)
+
+### Use it in your own repo
+
+1. Copy `.github/workflows/sorocheck.yml` into your project.
+2. Set `CONTRACT_PATH` to your Soroban contract crate (for example `./contracts` or `./contracts/hello_world`).
+3. If you publish/install sorocheck instead of building from source, replace the build step with something like:
+
+```yaml
+- name: Install sorocheck
+  run: cargo install --locked --path path/to/sorocheck
+# or, once published:
+# run: cargo install --locked sorocheck
+```
+
+Point sorocheck at the contract package only - not a monorepo root that also contains frontends or host apps - so `std` usage in non-contract code does not create noise.
+
 ## License
 
 MIT
