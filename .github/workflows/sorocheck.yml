@@ -1,0 +1,46 @@
+# Example GitHub Actions workflow for sorocheck.
+#
+# Copy this file into your repository (or keep it here to gate this repo's
+# example contract path). The job fails when sorocheck exits 1 (error-level
+# findings). Customize CONTRACT_PATH for your layout.
+
+name: sorocheck
+
+on:
+  push:
+    branches: [main, master]
+  pull_request:
+
+permissions:
+  contents: read
+
+env:
+  # Directory passed to `sorocheck`. Point this at your Soroban contract crate
+  # (or contracts workspace folder), not a full monorepo root with apps.
+  CONTRACT_PATH: examples/contract
+  CARGO_TERM_COLOR: always
+
+jobs:
+  sorocheck:
+    name: Build and run sorocheck
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Install Rust toolchain
+        uses: dtolnay/rust-toolchain@stable
+        with:
+          # Match workspace rust-version / Soroban minimum (1.84+).
+          toolchain: stable
+          targets: wasm32v1-none
+
+      - name: Cache cargo
+        uses: Swatinem/rust-cache@v2
+
+      - name: Build sorocheck
+        run: cargo build -p sorocheck --release
+
+      - name: Run sorocheck on contract path
+        # Non-zero exit (error-level findings) fails the job automatically.
+        run: ./target/release/sorocheck "${{ env.CONTRACT_PATH }}"
