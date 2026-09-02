@@ -36,12 +36,31 @@ sorocheck .
 
 ## Example output
 
+### Clean contract (no issues)
+```
+[INFO] toolchain.rust_version: Rust version 1.97.1 meets the minimum required (1.84.0)
+[INFO] toolchain.wasm32v1_none_target: Target `wasm32v1-none` is installed
+[INFO] toolchain.stellar_cli: `stellar` CLI is available
+```
+*Exit code: 0 (success)*
+
+### Contract with std usage (error)
+```
+[INFO] toolchain.rust_version: Rust version 1.97.1 meets the minimum required (1.84.0)
+[INFO] toolchain.wasm32v1_none_target: Target `wasm32v1-none` is installed
+[INFO] toolchain.stellar_cli: `stellar` CLI is available
+[ERROR] std_scan.disallowed_std_usage: src/lib.rs:15:5 - `std::println!()` usage in non-test code
+```
+*Exit code: 1 (has errors)*
+
+### Graceful error handling
 ```
 [INFO] toolchain.rust_version: Rust version 1.97.1 meets the minimum required (1.84.0)
 [INFO] toolchain.wasm32v1_none_target: Target `wasm32v1-none` is installed
 [INFO] toolchain.stellar_cli: `stellar` CLI is available
 [WARN] std_scan.disallowed_std_usage: could not parse src/test.rs: cannot parse string into token stream
 ```
+*Exit code: 0 (warnings don't fail)*
 
 - **Exit code 0** → no error-level findings
 - **Exit code 1** → one or more error-level findings

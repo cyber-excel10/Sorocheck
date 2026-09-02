@@ -1,7 +1,7 @@
-//! Check implementations for sorocheck.
-//!
-//! Each check implements the `Check` trait and scans for specific issues.
-//! New checks can be added by creating a new module and implementing the trait.
+// this checks implementations for sorocheck.
+//
+// Each check implements the `Check` trait and scans for specific issues.
+// New checks can be added by creating a new module and implementing the trait.
 
 use crate::context::Context;
 use crate::error::Error;
@@ -17,7 +17,7 @@ pub mod std_scan;
 /// 2. Implement this trait for your check struct
 /// 3. Add your check to `run_all_checks()` in lib.rs
 pub trait Check {
-    /// Unique identifier for this check (shown in reports)
+    /// Unique identifier for this check
     fn name(&self) -> &'static str;
 
     /// Run the check against a project context
