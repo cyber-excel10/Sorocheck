@@ -2,7 +2,7 @@
 
 Pre-build checker for **Soroban (Stellar) smart contracts**.
 
-`sorocheck` catches common environment and restricted-Rust mistakes **before** you waste time on confusing build failures.
+`Sorocheck` catches common environment and restricted-Rust mistakes **before** you waste time on confusing build failures.
 
 > This is a focused developer tool for Soroban contract crates — not a general Rust linter and not a full security audit tool.
 
