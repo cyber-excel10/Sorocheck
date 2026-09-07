@@ -2,9 +2,9 @@
 
 Pre-build checker for **Soroban (Stellar) smart contracts**.
 
-`Sorocheck` catches common environment and restricted-Rust mistakes **before** you waste time on confusing build failures.
+`Sorocheck` catches common environment and restricted Rust mistakes **before** you waste time on confusing build failures.
 
-> This is a focused developer tool for Soroban contract crates — not a general Rust linter and not a full security audit tool.
+> This is a focused developer tool for Soroban contract crates not a general Rust linter and not a full security audit tool.
 
 ## What it checks
 
@@ -115,7 +115,7 @@ A sample workflow lives at [`.github/workflows/sorocheck.yml`](.github/workflows
 # run: cargo install --locked sorocheck
 ```
 
-Point sorocheck at the contract package only - not a monorepo root that also contains frontends or host apps - so `std` usage in non-contract code does not create noise.
+Point sorocheck at the contract package only not a monorepo root that also contains frontends or host apps  so `std` usage in non-contract code does not create noise.
 
 ## License
 
