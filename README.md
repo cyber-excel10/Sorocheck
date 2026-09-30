@@ -102,7 +102,7 @@ A sample workflow lives at [`.github/workflows/sorocheck.yml`](.github/workflows
 3. Runs it against a contract path (`examples/contract` by default)
 4. Fails the job when sorocheck exits with code **1** (error-level findings)
 
-### Use it in your own repo
+### You can use it in your own repo
 
 1. Copy `.github/workflows/sorocheck.yml` into your project.
 2. Set `CONTRACT_PATH` to your Soroban contract crate (for example `./contracts` or `./contracts/hello_world`).
